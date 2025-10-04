@@ -4,8 +4,7 @@ Este é o repositório do meu portfólio pessoal, uma página única e interativ
 
 **➡️ Veja o projeto no ar:** [**https://giangrig.github.io/portfolio/**](https://giangrig.github.io/portfolio/)  _(Substitua pelo seu link do GitHub Pages)_
 
-![Prévia do Portfólio](https://i.imgur.com/example.gif) 
-_(Dica: grave um GIF curto da tela mostrando a rolagem e os efeitos e substitua o link acima)_
+![Prévia do Portfólio]![Image](https://github.com/user-attachments/assets/7e23910b-bcda-4999-bae7-3bf8916fa53f) 
 
 ---
 
