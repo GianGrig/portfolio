@@ -334,15 +334,3 @@ body {
     padding: 0;
   }
 }
-
-
-/* 3. Finalmente, REMOVA a regra antiga que escondia a navegação.
-      O código abaixo deve ser APAGADO do seu CSS. */
-
-/*
-@media (max-width: 520px) {
-  .side-nav {
-    display: none; 
-  }
-}
-*/
