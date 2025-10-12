@@ -11,8 +11,10 @@
   --muted-light: #888; /* Cinza claro para texto inativo em fundo escuro */
   --accent: #000;
   --bg: #f5f5f5;
-  --gap: 28px;
   --max-width: 1200px;
+
+  /* --- ESPAÇAMENTO FLUIDO --- */
+  --gap: clamp(1.125rem, 3vw, 1.75rem); /* 18px a 28px */
 }
 html,
 body {
@@ -39,7 +41,8 @@ body {
   align-items: center;
   justify-content: center;
   scroll-snap-align: start;
-  padding: 48px 24px;
+  /* --- PADDING FLUIDO --- */
+  padding: clamp(1.5rem, 5vw, 3rem) var(--gap);
 }
 .section--light {
   background: var(--light);
@@ -63,7 +66,8 @@ body {
   padding-left: 6px;
 }
 .section-header h1 {
-  font-size: 2rem;
+  /* --- TAMANHO DE FONTE FLUIDO --- */
+  font-size: clamp(1.75rem, 5vw, 2.25rem);
   letter-spacing: 0.6px;
   margin-bottom: 4px;
 }
@@ -71,26 +75,30 @@ body {
   color: inherit;
   font-size: 0.95rem;
 }
+
+/* --- SEÇÃO DO BODY ATUALIZADA PARA SER INTRINSECAMENTE RESPONSIVA --- */
 .section-body {
   display: flex;
-  gap: 28px;
+  flex-wrap: wrap-reverse; /* Permite que os itens quebrem a linha naturalmente */
+  gap: var(--gap);
   align-items: center;
-  justify-content: space-between;
+  justify-content: center; /* Centraliza para um melhor visual em telas médias */
   width: 100%;
 }
 .content-left {
-  flex: 1 1 520px;
+  flex: 1 1 480px; /* Base de 480px, pode crescer e encolher */
   text-align: left;
 }
 .content-right {
-  flex: 0 0 420px;
+  flex: 1 1 400px; /* Base de 400px, pode crescer e encolher */
   display: flex;
   align-items: center;
   justify-content: center;
 }
+
 .lead {
-  font-size: 1.05rem;
-  line-height: 1.5;
+  font-size: clamp(1rem, 2.5vw, 1.1rem); /* Fonte fluida */
+  line-height: 1.6; /* Melhora a legibilidade */
   margin-bottom: 14px;
   color: inherit;
 }
@@ -150,17 +158,17 @@ body {
   display: block;
   object-fit: cover;
 }
-@media (max-width: 900px) {
-  .section-body {
-    flex-direction: column-reverse;
-    align-items: center;
+
+/* O media query de 900px para o layout foi removido, pois agora é automático.
+   Mantemos apenas os ajustes para telas muito pequenas.
+*/
+@media (max-width: 520px) {
+  .lb-thumbs .thumb-mini {
+    width: 72px;
+    height: 48px;
   }
-  .content-right {
-    width: 100%;
-    max-width: 720px;
-  }
-  .content-left {
-    width: 100%;
+  .side-nav {
+    display: none;
   }
 }
 
@@ -201,105 +209,140 @@ body {
   color: var(--light);
 }
 
-/* Pequenos ajustes responsivos */
-@media (max-width: 520px) {
-  .lb-thumbs .thumb-mini {
-    width: 72px;
-    height: 48px;
-  }
-  .side-nav {
-    display: none;
-  }
-}
-
 /* ---------- ESTILOS ADAPTATIVOS PARA BOTÕES ---------- */
-
-/* TEMA ESCURO: Inverte as cores do botão preenchido */
 .section--dark .btn:not(.ghost) {
-  background: var(--light); /* Fundo branco */
-  color: var(--dark);       /* Texto preto */
+  background: var(--light);
+  color: var(--dark);
 }
-
-/* EFEITO HOVER (BÔNUS) */
-
-/* Melhora o hover do botão preenchido no tema claro */
 .section--light .btn:not(.ghost):hover {
-  background: #333; /* Um pouco mais claro que o preto total */
+  background: #333;
 }
-
-/* Adiciona um hover para o botão preenchido no tema escuro */
 .section--dark .btn:not(.ghost):hover {
-  background: #e0e0e0; /* Um branco levemente acinzentado */
+  background: #e0e0e0;
 }
-
 
 /* ---------- ESTILOS DO SLIDER DE IMAGENS (Aprimorado) ---------- */
 .slider-container {
   position: relative;
   width: 100%;
-  max-width: 420px; /* Garante que o slider tenha o mesmo tamanho do .thumb padrão */
+  max-width: 420px;
 }
-
-/* Os botões do slider - AGORA MAIS BONITOS */
 .slider-btn {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background-color: rgba(0, 0, 0, 0.4); /* Fundo mais suave */
+  background-color: rgba(0, 0, 0, 0.4);
   color: white;
   border: none;
   cursor: pointer;
-  padding: 8px 14px; /* Ajusta o padding para um visual mais sutil */
-  font-size: 24px; /* Setas maiores */
+  padding: 8px 14px;
+  font-size: 24px;
   font-weight: bold;
-  border-radius: 50%; /* Botões circulares */
+  border-radius: 50%;
   transition: background-color 0.2s ease, transform 0.1s ease;
   z-index: 10;
-  display: flex; /* Para centralizar o &#10094; */
+  display: flex;
   align-items: center;
   justify-content: center;
-  width: 40px; /* Tamanho fixo para o círculo */
-  height: 40px; /* Tamanho fixo para o círculo */
+  width: 40px;
+  height: 40px;
 }
-
 .slider-btn.prev {
-  left: 8px; /* Mais afastado da borda */
+  left: 8px;
 }
-
 .slider-btn.next {
-  right: 8px; /* Mais afastado da borda */
+  right: 8px;
 }
-
 .slider-btn:hover {
-  background-color: rgba(0, 0, 0, 0.7); /* Mais escuro no hover */
-  transform: translateY(-50%) scale(1.05); /* Pequeno zoom no hover */
+  background-color: rgba(0, 0, 0, 0.7);
+  transform: translateY(-50%) scale(1.05);
 }
-
-/* Garante que a imagem dentro do slider tenha as bordas arredondadas */
 .slider-container .thumb img {
   border-radius: 10px;
 }
 
-
 /* ---------- ESTILOS PARA "IMAGEM EM BREVE" (NOVO) ---------- */
 .thumb.coming-soon {
-  background-color: #eee; /* Um cinza claro de fundo */
-  color: #555; /* Texto cinza escuro */
+  background-color: #eee;
+  color: #555;
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 250px; /* Altura padrão, pode ajustar conforme necessário */
+  height: 250px;
   font-size: 1.2rem;
   font-weight: 600;
   text-align: center;
-  border: 2px dashed #ccc; /* Borda tracejada suave */
-  box-shadow: none; /* Remove a sombra padrão, ou coloque uma mais sutil */
-  cursor: default; /* Altera o cursor para não parecer clicável */
-  user-select: none; /* Impede a seleção do texto */
+  border: 2px dashed #ccc;
+  box-shadow: none;
+  cursor: default;
+  user-select: none;
 }
-
 .section--dark .thumb.coming-soon {
   background-color: #333;
   color: #ccc;
   border-color: #555;
 }
+
+/* =================================================================== */
+/* ========== AJUSTES DE NAVEGAÇÃO RESPONSIVA (NOVO CÓDIGO) ========== */
+/* =================================================================== */
+
+/* 1. Em telas maiores, criamos um "espaço seguro" para a navegação lateral.
+      Isso impede que o texto fique embaixo dela. */
+@media (min-width: 769px) {
+  .section-inner {
+    /* Adiciona um padding à esquerda com a largura aproximada da nav */
+    padding-left: 100px; 
+  }
+}
+
+
+/* 2. Em telas menores (tablets e celulares), transformamos a nav lateral em uma barra no topo. */
+@media (max-width: 768px) {
+  /* Adiciona um espaçamento no topo do corpo da página para não esconder o conteúdo */
+  body {
+    padding-top: 60px; /* Altura da nossa nova barra de navegação */
+  }
+
+  .side-nav {
+    /* Transforma a nav em uma barra horizontal fixa no topo */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    transform: translateY(0); /* Reseta a centralização vertical */
+    
+    /* Estilos para a barra */
+    background: var(--light);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    
+    /* Centraliza os links dentro da barra */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+  }
+  
+  .section--dark .side-nav {
+      background: var(--dark);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  }
+
+  .side-nav ul {
+    flex-direction: row; /* Alinha os links horizontalmente */
+    gap: 16px; /* Espaçamento entre os links */
+    padding: 0;
+  }
+}
+
+
+/* 3. Finalmente, REMOVA a regra antiga que escondia a navegação.
+      O código abaixo deve ser APAGADO do seu CSS. */
+
+/*
+@media (max-width: 520px) {
+  .side-nav {
+    display: none; 
+  }
+}
+*/
